@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#root'
 
-  match "*all" => "application#cors_preflight_check", :constraints => { :method => "OPTIONS" }
+  post "*all" => "application#cors_preflight_check", :constraints => { :method => "OPTIONS" }
 end
