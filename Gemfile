@@ -36,7 +36,7 @@ gem 'search_object'
 gem 'search_object_graphql'
 gem 'annotate'
 gem 'pry-rails'
-
+gem 'rack-cors', :require => 'rack/cors'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'rails_12factor'
