@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: foods
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  amount_g   :integer          default(1), not null
+#  calories   :integer          default(0)
+#  protein    :integer          default(0)
+#  carbs      :integer          default(0)
+#  fat        :integer          default(0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  amount_g: 1
+  calories: 1
+  protein: 1
+  carbs: 1
+  fat: 1
+
+two:
+  name: MyString
+  amount_g: 1
+  calories: 1
+  protein: 1
+  carbs: 1
+  fat: 1
