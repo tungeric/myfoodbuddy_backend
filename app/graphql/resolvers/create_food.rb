@@ -1,5 +1,6 @@
 class Resolvers::CreateFood < GraphQL::Function
   argument :name, !types.String
+  argument :category, types.String
   argument :amount_g, !types.Int
   argument :calories, types.Int
   argument :protein, types.Int
@@ -12,6 +13,7 @@ class Resolvers::CreateFood < GraphQL::Function
     food = Food.new(
       name: args[:name],
       amount_g: args[:amount_g],
+      category: args[:category],
       calories: args[:calories],
       protein: args[:protein],
       carbs: args[:carbs],
