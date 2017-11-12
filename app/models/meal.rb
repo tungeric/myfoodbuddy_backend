@@ -19,4 +19,8 @@ class Meal < ApplicationRecord
   def ensure_meal_time
     self.meal_time ||= Time.now
   end
+
+  def meal_time_since_epoch
+    self.meal_time.to_f * 1000
+  end
 end
