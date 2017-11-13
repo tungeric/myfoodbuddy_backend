@@ -32,8 +32,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'graphql'
-gem 'search_object'
-gem 'search_object_graphql'
+gem 'search_object', '1.2.0'
+gem 'search_object_graphql', '0.1'
 gem 'annotate'
 gem 'pry-rails'
 gem 'rack-cors', :require => 'rack/cors'

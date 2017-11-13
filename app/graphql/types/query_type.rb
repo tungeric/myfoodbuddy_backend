@@ -11,6 +11,6 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve -> (obj, args, ctx) { Meal.all }
   end
 
-  field :allDayMeals, function: Resolvers::AllDayMeals
+  field :allDayMeals, function: Resolvers::MealsSearch
   
 end
