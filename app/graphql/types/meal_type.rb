@@ -17,6 +17,7 @@ Types::MealType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :name, types.String
   field :meal_time, !Types::DateTimeType
+  field :meal_foods, !Types::MealFoodType
   field :meal_time_since_epoch, types.Float
   field :foods, !types[Types::FoodType] do
      resolve ->(obj, args, ctx) do
