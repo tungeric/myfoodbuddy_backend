@@ -13,7 +13,7 @@ class Meal < ApplicationRecord
   validates :name, presence: true
   before_create :ensure_meal_time
 
-  has_many :meal_foods
+  has_many :meal_foods, dependent: :destroy
   has_many :foods, through: :meal_foods
 
   def ensure_meal_time
