@@ -7,7 +7,7 @@ class Resolvers::CreateMeal < GraphQL::Function
   def call(obj, args, ctx)
     meal = Meal.new(
       name: args[:name],
-      meal_time: Time.at(args[:meal_time]),
+      meal_time: Time.at(args[:meal_time]/1000),
       )
     if meal.save
       return meal
