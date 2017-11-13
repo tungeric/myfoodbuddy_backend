@@ -16,5 +16,6 @@ Types::QueryType = GraphQL::ObjectType.define do
   end
 
   field :allDayMeals, function: Resolvers::MealsSearch
+  field :foodSearch, function: Resolvers::FoodSearch
   
 end
