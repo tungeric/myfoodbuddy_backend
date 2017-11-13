@@ -1,13 +1,13 @@
 class Resolvers::CreateMeal < GraphQL::Function
   argument :name, types.String
-  argument :meal_time, Types::DateTimeType
+  argument :meal_time, types.Float
 
   type Types::MealType
 
   def call(obj, args, ctx)
     meal = Meal.new(
       name: args[:name],
-      meal_time: args[:meal_time],
+      meal_time: Time.at(args[:meal_time]),
       )
     if meal.save
       return meal
