@@ -1,17 +1,11 @@
 class Resolvers::DeleteMealFood < GraphQL::Function
-  argument :id, !types.Int
+  argument :mealfood_id, !types.Int
 
   type Types::MealFoodType
 
   def call(obj, args, ctx)
-    meal_food = MealFood.find_by(
-      id: args[:id]
-      )
-    if meal_food.destroy
-      return meal_food
-    else
-      return GraphQL::ExecutionError.new("Invalid input: #{meal_food.errors.full_messages.join(', ')}")
-    end
+    meal_food = MealFood.find(args[:mealfood_id])
+    meal_food.destroy!
   rescue ActiveRecord::RecordInvalid => e
     GraphQL::ExecutionError.new("Invalid input: #{e.record.full_messages.join(', ')}")
   end
