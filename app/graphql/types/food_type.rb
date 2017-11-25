@@ -18,7 +18,6 @@ Types::FoodType = GraphQL::ObjectType.define do
 
   # it has the following fields
   field :id, !types.ID
-  field :category, types.String
   field :name, !types.String
   field :amount_g, !types.Int
   field :calories, types.Int
