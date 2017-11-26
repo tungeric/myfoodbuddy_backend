@@ -115,4 +115,29 @@ class Meal < ApplicationRecord
     Meal.total_fat / Meal.count
   end
 
+  # All food averages
+
+  def self.total_num_meal_food_items
+    food_count = 0;
+    Meal.all.each do |meal|
+      food_count += meal.foods.length
+    end
+    food_count
+  end
+
+  def self.average_calories_per_food
+    Meal.total_calories / Meal.total_num_meal_food_items
+  end
+
+  def self.average_protein_per_food
+    Meal.total_protein / Meal.total_num_meal_food_items
+  end
+
+  def self.average_carbs_per_food
+    Meal.total_carbs / Meal.total_num_meal_food_items
+  end
+
+  def self.average_fat_per_food
+    Meal.total_fat / Meal.total_num_meal_food_items
+  end
 end
