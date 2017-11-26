@@ -24,6 +24,7 @@ Types::FoodType = GraphQL::ObjectType.define do
   field :protein, types.Int
   field :carbs, types.Int
   field :fat, types.Int
+  field :averageness_index, types.Float
   field :meals, !types[Types::MealType] do
      resolve ->(obj, args, ctx) do
        obj.meals
