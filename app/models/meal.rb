@@ -27,92 +27,40 @@ class Meal < ApplicationRecord
 
   # MEAL COLLECTED DATA
 
-  def meal_calories
-    total_calories = 0
+  def meal_data
+    meal_data = Hash.new(0)
     self.foods.each do |food|
-      total_calories += food.calories
+      meal_data["total_calories"] += food.calories
+      meal_data["total_protein"] += food.protein
+      meal_data["total_carbs"] += food.carbs
+      meal_data["total_fat"] += food.fat
     end
-    total_calories
-  end
-
-  def meal_protein
-    total_protein = 0
-    self.foods.each do |food|
-      total_protein += food.protein
-    end
-    total_protein
-  end
-
-  def meal_carbs
-    total_carbs = 0
-    self.foods.each do |food|
-      total_carbs += food.carbs
-    end
-    total_carbs
-  end
-
-  def meal_fat
-    total_fat = 0
-    self.foods.each do |food|
-      total_fat += food.fat
-    end
-    total_fat
+    meal_data
   end
 
   # TOTAL COLLECTED DATA
 
-  def self.total_calories
-    total_calories = 0
+  def self.cumulative_data
+    cumulative_data = Hash.new(0)
     all_meals = Meal.all
     all_meals.each do |meal|
-      total_calories += meal.meal_calories
+      cumulative_data["total_calories"] += meal.meal_data["total_calories"]
+      cumulative_data["total_protein"] += meal.meal_data["total_protein"]
+      cumulative_data["total_carbs"] += meal.meal_data["total_carbs"]
+      cumulative_data["total_fat"] += meal.meal_data["total_fat"]
     end
-    total_calories
-  end
-
-  def self.total_protein
-    total_protein = 0
-    all_meals = Meal.all
-    all_meals.each do |meal|
-      total_protein += meal.meal_protein
-    end
-    total_protein
-  end
-
-  def self.total_carbs
-    total_carbs = 0
-    all_meals = Meal.all
-    all_meals.each do |meal|
-      total_carbs += meal.meal_carbs
-    end
-    total_carbs
-  end
-
-  def self.total_fat
-    total_fat = 0
-    all_meals = Meal.all
-    all_meals.each do |meal|
-      total_fat += meal.meal_fat
-    end
-    total_fat
+    cumulative_data
   end
 
   # AVERAGE COLLECTED DATA
 
-  def self.average_calories_per_meal
-    Meal.total_calories / Meal.count
-  end
-
-  def self.average_protein_per_meal
-    Meal.total_protein / Meal.count
-  end
-
-  def self.average_carbs_per_meal
-    Meal.total_carbs / Meal.count
-  end
-
-  def self.average_fat_per_meal
-    Meal.total_fat / Meal.count
+  def self.average_data_per_meal
+    num_meals = Meal.count
+    average_data_per_meal = Hash.new
+    Meal.cumulative_data.each do |key, value| 
+      average_data_per_meal[key]= value / num_meals
+    end
+    average_data_per_meal
   end
 
   # All food averages
@@ -125,19 +73,13 @@ class Meal < ApplicationRecord
     food_count
   end
 
-  def self.average_calories_per_food
-    Meal.total_calories / Meal.total_num_meal_food_items
+  def self.average_food_data
+    num_foods = Meal.total_num_meal_food_items
+    average_food_data = Hash.new
+    Meal.cumulative_data.each do |key, value|
+      average_food_data[key] = value / num_foods
+    end
+    average_food_data
   end
 
-  def self.average_protein_per_food
-    Meal.total_protein / Meal.total_num_meal_food_items
-  end
-
-  def self.average_carbs_per_food
-    Meal.total_carbs / Meal.total_num_meal_food_items
-  end
-
-  def self.average_fat_per_food
-    Meal.total_fat / Meal.total_num_meal_food_items
-  end
 end
