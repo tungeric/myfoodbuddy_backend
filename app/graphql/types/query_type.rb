@@ -17,5 +17,12 @@ Types::QueryType = GraphQL::ObjectType.define do
 
   field :allDayMeals, function: Resolvers::MealsSearch
   field :foodSearch, function: Resolvers::FoodSearch
+
+  field :topMostAverageFoods, !types[Types::FoodType] do
+    argument :limit, types.Int, default_value: 5, prepare: -> (limit){ limit }
+    resolve -> (obj, args, ctx) {
+      Food.sort_by_averageness_index(args[:limit])
+    }
+  end
   
 end

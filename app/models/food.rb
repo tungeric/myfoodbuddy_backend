@@ -34,4 +34,9 @@ class Food < ApplicationRecord
     # self.carbs / Meal.average_carbs_per_food + 
     # self.fat / Meal.average_fat_per_food).to_f / 4
   end
+
+  def self.sort_by_averageness_index(limit)
+    num_foods = Food.count
+    Food.all.sort_by(&:averageness_index)[num_foods - limit..-1]
+  end
 end
