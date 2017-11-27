@@ -21,10 +21,11 @@ class Food < ApplicationRecord
   has_many :meals, through: :meal_foods
 
   def averageness_index
-    calories_diff = ((self.calories - Meal.average_calories_per_food).to_f / Meal.average_calories_per_food).abs
-    protein_diff = ((self.protein - Meal.average_protein_per_food).to_f / Meal.average_protein_per_food).abs
-    carbs_diff = ((self.carbs - Meal.average_carbs_per_food).to_f / Meal.average_carbs_per_food).abs
-    fat_diff = ((self.fat - Meal.average_fat_per_food).to_f / Meal.average_fat_per_food).abs
+    average_food = Meal.average_food_data
+    calories_diff = ((self.calories - average_food["total_calories"]).to_f / average_food["total_calories"]).abs
+    protein_diff = ((self.protein - average_food["total_protein"]).to_f / average_food["total_protein"]).abs
+    carbs_diff = ((self.carbs - average_food["total_carbs"]).to_f / average_food["total_carbs"]).abs
+    fat_diff = ((self.fat - average_food["total_fat"]).to_f / average_food["total_fat"]).abs
     total_diff = (calories_diff + protein_diff + carbs_diff + fat_diff)
     averageness = 1 - (total_diff.to_f / 4)
     averageness
