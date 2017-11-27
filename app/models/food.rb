@@ -36,7 +36,7 @@ class Food < ApplicationRecord
   end
 
   def self.sort_by_averageness_index(limit)
-    num_foods = Food.count
-    Food.all.sort_by(&:averageness_index)[num_foods - limit..-1]
+    max_limit = [Food.count, limit].min
+    Food.all.sort_by(&:averageness_index).reverse![0...max_limit]
   end
 end
